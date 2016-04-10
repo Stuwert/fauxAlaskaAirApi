@@ -6,7 +6,7 @@ exports.up = function(knex, Promise) {
     table.integer('currentMiles');
     table.integer('username');
     table.string('password');
-    table.string('eail');
+    table.string('email');
     table.boolean('authorization');
     table.string('status')
     table.integer('milesMultiplier')
