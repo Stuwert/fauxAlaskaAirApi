@@ -1,6 +1,5 @@
 require('dotenv').load();
-
-var environment = process.env.NODE_ENV || 'development';
+var environment = process.argv[process.argv.length - 1] === 'production' ? 'production' : 'development';
 var config = require('../knexfile')[environment]
 var db = require('knex')(config);
 
@@ -24,7 +23,7 @@ exports.seed = function(knex, Promise) {
           }),
         knex('user_flights')
           .insert({
-            user_id: users[0].id,
+            user_id: users[1].id,
             flight_id: flights[0].id,
             milesEarned: 823,
             seatRow: 11,
