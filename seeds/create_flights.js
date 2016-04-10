@@ -7,6 +7,7 @@ exports.seed = function(knex, Promise) {
     // Inserts seed entries
     knex('flights')
       .insert({
+        id: 1234,
         flightDeparture:  new Date(2016, 3, 8, 3, 02, 0),
         flightArrivalTime: new Date(2016, 3, 8, 9, 22, 0),
         departureAirport: 'SEA',

@@ -31,14 +31,14 @@ console.log(req.headers);
             .where('flight_id', flight_id)
             .first()
             .then(function(information){
-              res.header(202).json(information)
+              res.status(202).json(information)
             })
         }else{
-          res.header(403).json({information: 'Incorrect password'})
+          res.status(403).json({information: 'Incorrect password'})
         }
       })
     }else{
-      res.header(403).json({information: 'Incorrect password'})
+      res.status(403).json({information: 'Incorrect password'})
     }
   })
 })
@@ -73,12 +73,12 @@ Users.where({username : username}).first().then(function(user){
           milesEarned: req.body.payload.miles,
           status: null
         }).then(function(){
-          res.header(201).json({information: 'Succesfully Saved!'})
+          res.status(201).json({information: 'Succesfully Saved!'})
         })
       })
     })
   }else{
-    res.header(409).json({information: "User already exists"})
+    res.status(409).json({information: "User already exists"})
   }
 })
 
