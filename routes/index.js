@@ -6,4 +6,19 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+// Validtes login
+
+
+// Creates new user
+
+
+// Receives data dump for emails 
+
+
+
+
+
+
+
+
 module.exports = router;
