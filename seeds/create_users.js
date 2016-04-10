@@ -13,7 +13,7 @@ exports.seed = function(knex, Promise) {
       .insert({
         lifetimeMiles: 5000,
         currentMiles: 200,
-        username: 0015,
+        username: 'admin',
         password: bcrypt.hashSync(process.env.ADMIN_PW, salt),
         email: 'admin@urback.net',
         authorization: true,
@@ -24,9 +24,9 @@ exports.seed = function(knex, Promise) {
       .insert({
         lifetimeMiles: 100,
         currentMiles: 0,
-        username: 1161,
+        username: 'user',
         password: bcrypt.hashSync(process.env.USER_PW, salt),
-        email: 'admin@urback.net',
+        email: 'user@urback.net',
         authorization: false,
         status: 'silver',
         milesMultiplier: 1

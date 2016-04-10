@@ -11,12 +11,12 @@ router.get('/', function(req, res, next) {
 
 // Validates login
 router.get('/login', function(req, res){
+console.log(req.headers);
+  // expected payload contains username, password, and flight #
 
-  //expected payload contains username, password, and flight #
-
-  var username = req.body.payload.username;
-  var password = req.body.payload.password;
-  var flight_id = req.body.payload.flight_id;
+  var username = req.headers.username;
+  var password = req.headers.password;
+  var flight_id = req.headers.flightinfo;
 
 
   Users().where({username: username}).first().then(function(user){
@@ -24,11 +24,11 @@ router.get('/login', function(req, res){
       bcrypt.compare(password, user.password, function(err, result){
         //result should be a boolean
         if(result){
-          knex.select().from('user_flights')
-            .fullOuterJoin('users', 'user_flights.user_id', 'users.id')
-            .where('user.id', user.id)
-            .fullOuterJoin('flights', 'user_flights.flight_id', 'flights.id')
-            .where('flights.id', flight_id)
+          Users()
+            .from('users')
+            .leftJoin('user_flights', 'user_flights.user_id', 'users.id')
+            .where('user_id', user.id)
+            .where('flight_id', flight_id)
             .first()
             .then(function(information){
               res.header(202).json(information)
@@ -67,7 +67,7 @@ Users.where({username : username}).first().then(function(user){
       }).returns('id').then(function(userid){
         User_Flights().insert({
           user_id: userid,
-          flight_id: flight_id
+          flight_id: flight_id,
           seatLocation: null,
           seatRow: null,
           milesEarned: req.body.payload.miles,
